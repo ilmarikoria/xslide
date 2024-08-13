@@ -322,6 +322,16 @@
 		  (xsl-sort-alist mode-alist))))
      (xsl-sort-alist template-alist))))
 
+(defun xsl-add-boilerplate ()
+  "Insert XSL v2 boilerplate"
+  (interactive)
+  (insert "<xsl:stylesheet xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\"
+                xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"
+                exclude-result-prefixes=\"xs\"
+                version=\"2.0\">
+
+</xsl:stylesheet>"))
+
 
 
 

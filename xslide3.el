@@ -332,6 +332,12 @@
 
 </xsl:stylesheet>"))
 
+(defun xsl-add-empty-template ()
+  "Insert empty template"
+  (interactive)
+  (insert "<xsl:template match=\"\">
+</xsl:template>"))
+
 
 
 

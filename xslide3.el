@@ -328,23 +328,36 @@
   (insert "<xsl:stylesheet xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\"
                 xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"
                 exclude-result-prefixes=\"xs\"
-                version=\"2.0\">
-
-</xsl:stylesheet>"))
+                version=\"2.0\">\n")
+  (let ((p (point)))
+  (insert "\n</xsl:stylesheet>")
+  (goto-char p)))
 
 (defun xsl-add-root-template ()
-  "Insert empty template"
+  "Insert empty root template"
   (interactive)
-  (insert "<xsl:template match=\"/\">
-    <xsl:apply-templates select=\"\"/>
-</xsl:template>"))
+  (insert "<xsl:template match=\"/\">\n")
+  (insert "<xsl:apply-templates select=\"")
+  (let ((p (point)))
+  (insert "\"/>\n")
+  (insert "</xsl:template>")
+  (goto-char p)))
 
+(defun xsl-add-apply-templates ()
+  "Insert empty apply templates"
+  (interactive)
+  (insert "<xsl:apply-templates select=\"")
+  (let ((p (point)))
+  (insert "\"/>\n")
+  (goto-char p)))
 
 (defun xsl-add-empty-template ()
   "Insert empty template"
   (interactive)
-  (insert "<xsl:template match=\"\">
-</xsl:template>"))
+  (insert "<xsl:template match=\"\">")
+  (let ((p (point)))
+  (insert "</xsl:template>")
+  (goto-char p)))
 
 
 

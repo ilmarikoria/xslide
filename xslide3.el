@@ -332,6 +332,14 @@
 
 </xsl:stylesheet>"))
 
+(defun xsl-add-root-template ()
+  "Insert empty template"
+  (interactive)
+  (insert "<xsl:template match=\"/\">
+    <xsl:apply-templates select=\"\"/>
+</xsl:template>"))
+
+
 (defun xsl-add-empty-template ()
   "Insert empty template"
   (interactive)

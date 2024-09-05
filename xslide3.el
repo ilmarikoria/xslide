@@ -359,6 +359,13 @@
   (insert "</xsl:template>")
   (goto-char p)))
 
+(defun xsl-add-output-method (output)
+  "Insert output method declaration"
+  (interactive "sEnter output method: ")
+  (insert 
+   (format "\n<xsl:output method=\"%s\" encoding=\"utf-8\" indent=\"yes\" />"
+           output)))
+
 
 
 

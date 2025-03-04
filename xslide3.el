@@ -363,7 +363,7 @@
   "Insert output method declaration"
   (interactive "sEnter output method: ")
   (insert 
-   (format "\n<xsl:output method=\"%s\" encoding=\"utf-8\" indent=\"yes\" />"
+   (format "\n<xsl:output method=\"%s\" encoding=\"utf-8\" indent=\"yes\" />\n"
            output)))
 
 

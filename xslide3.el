@@ -27,6 +27,9 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; imenu stuff
 
+(defvar xsl-saxon-jar-path nil
+  "Absolute path to the Saxon JAR file.")
+
 (defun xsl-sort-alist (alist)
   "Sort an alist."
   (sort
@@ -366,6 +369,26 @@
    (format "\n<xsl:output method=\"%s\" encoding=\"utf-8\" indent=\"yes\" />\n"
            output)))
 
+(defun xsl-run-transformation-on-current-file ()
+  "Run Saxon XSLT transformation using the current buffer file and a
+user-provided stylesheet."
+  (interactive)
+  (if (not xsl-saxon-jar-path)
+      (message "saxon jar path is not set")
+    (let* (
+           (current-file (buffer-file-name))
+           (stylesheet (read-file-name "select stylesheet: "))
+           (output-file (concat (file-name-directory current-file) (file-name-base current-file) "-saxon-output.xml"))
+           )
+      (if (and current-file (string= (file-name-extension current-file) "xml"))
+          (let ((command (format "java -jar \"%s\" -xsl:\"%s\" -s:\"%s\" -o:\"%s\""
+                                 xsl-saxon-jar-path
+                                 stylesheet
+                                 current-file
+                                 output-file)))
+            (message "Running command: %s" command)
+            (shell-command command))
+        (message "Buffer is not visiting an XML file!")))))
 
 
 

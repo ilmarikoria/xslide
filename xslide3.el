@@ -354,6 +354,17 @@
   (insert "\"/>\n")
   (goto-char p)))
 
+(defun xsl-add-identity-transform ()
+  "Insert identity transform boilerplate"
+  (interactive)
+  (insert "<xsl:template match=\"/ | @* | node()\">
+      <xsl:copy>
+        <xsl:apply-templates select=\"@* | node()\" />
+      </xsl:copy>
+   </xsl:template>"
+   ))
+
+
 (defun xsl-add-empty-template ()
   "Insert empty template"
   (interactive)

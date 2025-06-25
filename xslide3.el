@@ -330,8 +330,9 @@
   (interactive)
   (insert "<xsl:stylesheet xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\"
                 xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"
-                exclude-result-prefixes=\"xs\"
-                version=\"2.0\">\n")
+                xmlns:fn=\"http://www.w3.org/2005/xpath-functions\"
+                exclude-result-prefixes=\"xs fn\"
+                version=\"3.0\">\n")
   (let ((p (point)))
   (insert "\n</xsl:stylesheet>")
   (goto-char p)))
@@ -382,14 +383,14 @@
 
 (defun xsl-run-transformation-on-current-file ()
   "Run Saxon XSLT transformation using the current buffer file and a
-user-provided stylesheet."
+   user-provided stylesheet."
   (interactive)
   (if (not xsl-saxon-jar-path)
       (message "saxon jar path is not set")
     (let* (
            (current-file (buffer-file-name))
            (stylesheet (read-file-name "select stylesheet: "))
-           (output-file (concat (file-name-directory current-file) (file-name-base current-file) "-saxon-output.xml"))
+           (output-file (concat (file-name-directory current-file) (file-name-base current-file) "-saxon-output.html"))
            )
       (if (and current-file (string= (file-name-extension current-file) "xml"))
           (let ((command (format "java -jar \"%s\" -xsl:\"%s\" -s:\"%s\" -o:\"%s\""
